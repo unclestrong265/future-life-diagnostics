@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { color: #1F2933; }
+}
+
+@layer components {
+  .section-eyebrow { letter-spacing: .18em; }
+  .hero-grid {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .10) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  .reveal { opacity: 0; transform: translateY(18px); transition: all .6s ease; }
+  .reveal.show { opacity: 1; transform: none; }
+}

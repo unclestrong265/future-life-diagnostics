@@ -1,0 +1,10 @@
+# dependencies
+node_modules/
+
+# internal / private working material (do NOT publish to public GitHub Pages)
+references/
+details.md
+prompt.md
+concept-note.html
+Future-Life-Concept-Note.pdf
+ChatGPT Image*.png
