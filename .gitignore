@@ -1,5 +1,7 @@
 # dependencies
 node_modules/
+.env
+.env.*
 
 # internal / private working material (do NOT publish to public GitHub Pages)
 references/

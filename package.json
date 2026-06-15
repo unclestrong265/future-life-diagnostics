@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "sync:docs": "node scripts/sync-docs.mjs",
+    "build:deploy": "npm run build && npm run sync:docs",
     "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "devDependencies": {

@@ -88,6 +88,20 @@ logo-lockup.png
 hero-lab.png
 ```
 
+## PayChangu payments
+
+The online payment form uses a Netlify Function so the PayChangu secret key stays
+server-side. Deploy the repository on Netlify and add these environment variables:
+
+```
+PAYCHANGU_SECRET_KEY=your_client_secret_key
+PAYCHANGU_CURRENCY=MWK
+SITE_URL=https://your-live-site-url
+```
+
+Use `npm run build:deploy` before publishing static changes. The Netlify build is
+already configured in `netlify.toml`.
+
 ---
 
 ## Contact
