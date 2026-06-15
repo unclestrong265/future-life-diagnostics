@@ -4,7 +4,8 @@ Official company profile website for **Future-Life Diagnostics Laboratory & Medi
 
 > _"A Healthy Life Brings Happiness"_
 
-🌐 **Live site:** _add your GitHub Pages URL here after deploying_
+Live site: https://unclestrong265.github.io/future-life-diagnostics/
+Custom domain: https://futurelifediagnostics.com/
 
 ---
 
