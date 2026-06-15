@@ -1,8 +1,47 @@
-# Future-Life Diagnostics — Company Profile Website
+# Future-Life Diagnostics Laboratory & Medical Technologies
 
-A single-page company profile website for **Future-Life Diagnostics Laboratory & Medical Technologies**.
+Official company profile website for **Future-Life Diagnostics Laboratory & Medical Technologies** — a certified private medical laboratory delivering accurate, reliable, and affordable diagnostic solutions across Malawi.
 
-Built with compiled **Tailwind CSS** (no CDN) and **Iconify** icons. Brand colours: navy `#243C6C` + leaf green `#60B43C` (see [colours.md](colours.md)).
+> _"A Healthy Life Brings Happiness"_
+
+🌐 **Live site:** _add your GitHub Pages URL here after deploying_
+
+---
+
+## About
+
+Future-Life Diagnostics combines advanced technology, scientific expertise, and exceptional
+customer service to improve healthcare outcomes for individuals, healthcare providers,
+organizations, and researchers. This is a modern, single-page company profile presenting the
+company's mission, values, and full service portfolio.
+
+## Features
+
+- 📱 **Fully responsive** — mobile menu, adapts to all screen sizes
+- 🎨 **On-brand** — navy `#243C6C` + leaf green `#60B43C` (see [colours.md](colours.md))
+- ⚡ **Fast & lightweight** — compiled Tailwind CSS, no heavy framework
+- 🧭 **Clear navigation** — sticky nav with smooth-scroll anchored sections
+- ☎️ **Clickable contacts** — tap-to-call, email, WhatsApp, and Google Maps
+- 🔗 **Social links** — Facebook, Instagram, TikTok, LinkedIn, X
+- 🔍 **SEO & share-ready** — meta description, Open Graph / Twitter card tags, favicon
+
+### Sections
+
+Hero · Company Overview · Vision & Mission · Core Values (C.H.E.S.T.C.R) ·
+Service Portfolio (Diagnostics, Preventive Health, Occupational Health, Training,
+Research, Medical Technologies) · Our Clients · Why Choose Us · Contact
+
+## Tech stack
+
+| | |
+|---|---|
+| Markup | HTML5 |
+| Styling | [Tailwind CSS](https://tailwindcss.com) (compiled, self-hosted) |
+| Icons | [Iconify](https://iconify.design) |
+| Fonts | Inter & Poppins (Google Fonts) |
+| Hosting | GitHub Pages (static) |
+
+---
 
 ## Project structure
 
@@ -17,15 +56,15 @@ hero-lab.png          → hero background image
 
 ## Editing & building
 
-The site uses a compiled Tailwind stylesheet. If you change any Tailwind classes in `index.html`
-(or styles in `src/input.css`), rebuild the CSS:
+If you change any Tailwind classes in `index.html` (or styles in `src/input.css`),
+rebuild the stylesheet:
 
 ```bash
 npm install        # first time only
 npm run build      # rebuild dist/output.css (minified)
 ```
 
-While actively editing, you can auto-rebuild on save:
+While actively editing, auto-rebuild on save:
 
 ```bash
 npm run dev        # watches and rebuilds automatically
@@ -33,9 +72,12 @@ npm run dev        # watches and rebuilds automatically
 
 > If you only edit text/content (not classes), no rebuild is needed.
 
-## Deploying (going live)
+## Deploying
 
-The site is fully static — just upload these files to any web host:
+The site is fully static. For **GitHub Pages**: push to your repo, then go to
+**Settings → Pages → Source: `main` branch / `(root)` → Save**.
+
+To host elsewhere (Netlify, Vercel, Cloudflare Pages), upload these files:
 
 ```
 index.html
@@ -45,15 +87,15 @@ logo-lockup.png
 hero-lab.png
 ```
 
-(You do **not** need to upload `node_modules`, `src/`, or the config files.)
+---
 
-Free hosting options: **Netlify**, **Vercel**, **GitHub Pages**, or **Cloudflare Pages** —
-drag-and-drop the folder, or connect a repo.
+## Contact
 
-## External dependencies (loaded at runtime)
+**Future-Life Diagnostics Laboratory & Medical Technologies**
+📍 Future-Life Laboratory Complex, Chendawaka Street, Area 25A, Lilongwe, Malawi
+☎ +265 888 640 728 · +265 980 855 554 · +265 995 825 705
+✉ futurelifediagnostics@gmail.com
 
-- **Iconify** icons — `code.iconify.design` (CDN)
-- **Google Fonts** — Inter & Poppins
+---
 
-These require an internet connection on the visitor's browser (standard for most sites).
-Tailwind CSS is **compiled locally** and self-hosted in `dist/output.css`.
+© 2026 Future-Life Diagnostics. All rights reserved.
