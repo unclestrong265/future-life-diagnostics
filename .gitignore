@@ -7,3 +7,6 @@ node_modules/
 # internal / private working material (do NOT publish to public GitHub Pages)
 private/
 prompt.md
+
+# Local Netlify folder
+.netlify

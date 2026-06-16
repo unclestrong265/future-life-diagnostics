@@ -390,6 +390,25 @@
               <input name="last_name" type="text" class="mt-2 w-full border border-line px-4 py-3 text-sm text-ink">
             </label>
           </div>
+          <label class="block">
+            <span class="text-xs font-semibold uppercase text-muted tracking-wide">Phone / WhatsApp</span>
+            <input name="phone" type="tel" inputmode="tel" placeholder="0980 855 554" class="mt-2 w-full border border-line px-4 py-3 text-sm text-ink" required>
+          </label>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="text-xs font-semibold uppercase text-muted tracking-wide">Preferred date</span>
+              <input name="appointment_date" type="date" class="mt-2 w-full border border-line px-4 py-3 text-sm text-ink" required>
+            </label>
+            <label class="block">
+              <span class="text-xs font-semibold uppercase text-muted tracking-wide">Preferred time</span>
+              <select name="appointment_time" class="mt-2 w-full border border-line px-4 py-3 text-sm text-ink" required>
+                <option value="08:00 - 10:00">Morning (08:00 - 10:00)</option>
+                <option value="10:00 - 12:00">Late morning (10:00 - 12:00)</option>
+                <option value="13:00 - 15:00">Afternoon (13:00 - 15:00)</option>
+                <option value="15:00 - 17:00">Late afternoon (15:00 - 17:00)</option>
+              </select>
+            </label>
+          </div>
           <button id="paymentSubmit" type="submit" class="inline-flex items-center justify-center gap-2 bg-leaf hover:bg-leaf-ink text-white font-semibold px-6 py-3 transition">
             <iconify-icon icon="mdi:lock"></iconify-icon> Continue to PayChangu
           </button>
@@ -468,6 +487,10 @@
   const paymentForm = document.getElementById('paymentForm');
   const paymentSubmit = document.getElementById('paymentSubmit');
   const paymentMessage = document.getElementById('paymentMessage');
+
+  // prevent picking a past appointment date
+  const apptDate = paymentForm.querySelector('input[name="appointment_date"]');
+  if (apptDate) apptDate.min = new Date().toISOString().split('T')[0];
 
   function setPaymentMessage(message, isError = false) {
     paymentMessage.textContent = message;

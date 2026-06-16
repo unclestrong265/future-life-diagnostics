@@ -1,19 +1,6 @@
+import { getEnv, json, logBooking } from "./_shared.mjs";
+
 const PAYCHANGU_PAYMENT_URL = "https://api.paychangu.com/payment";
-
-function json(data, status = 200) {
-  return Response.json(data, {
-    status,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-    },
-  });
-}
-
-function getEnv(name) {
-  return globalThis.Netlify?.env?.get(name) || "";
-}
 
 function getBaseUrl(req) {
   const configuredUrl = getEnv("SITE_URL");
@@ -51,7 +38,11 @@ export default async (req) => {
   const email = String(body.email || "").trim();
   const firstName = String(body.first_name || "").trim();
   const lastName = String(body.last_name || "").trim();
+  const phone = String(body.phone || "").trim();
   const service = String(body.service || "Future-Life Diagnostics service").trim();
+  const apptDate = String(body.appointment_date || "").trim();
+  const apptTime = String(body.appointment_time || "").trim();
+  const appointment = [apptDate, apptTime].filter(Boolean).join(" ");
 
   if (!Number.isFinite(amount) || amount < 100) {
     return json({ error: "Enter a valid amount of at least MWK 100." }, 400);
@@ -62,15 +53,16 @@ export default async (req) => {
   }
 
   const baseUrl = getBaseUrl(req);
+  const currency = getEnv("PAYCHANGU_CURRENCY") || "MWK";
   const txRef = `FLDX-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
   const payload = {
     amount,
-    currency: getEnv("PAYCHANGU_CURRENCY") || "MWK",
+    currency,
     email,
     first_name: firstName,
     last_name: lastName,
-    callback_url: `${baseUrl}/pay-success.html`,
-    return_url: `${baseUrl}/pay-failed.html`,
+    callback_url: `${baseUrl}/pay-success.html?ref=${txRef}`,
+    return_url: `${baseUrl}/pay-failed.html?ref=${txRef}`,
     tx_ref: txRef,
     customization: {
       title: "Future-Life Diagnostics",
@@ -78,6 +70,8 @@ export default async (req) => {
     },
     meta: {
       service,
+      phone,
+      appointment,
       source: "website",
     },
   };
@@ -99,6 +93,22 @@ export default async (req) => {
       502,
     );
   }
+
+  // Record the booking as "Pending Payment" (best-effort — never blocks checkout).
+  // The webhook upgrades this same row to "Paid" once payment is confirmed.
+  await logBooking({
+    tx_ref: txRef,
+    status: "Pending Payment",
+    service,
+    amount,
+    currency,
+    first_name: firstName,
+    last_name: lastName,
+    email,
+    phone,
+    appointment,
+    created_at: new Date().toISOString(),
+  });
 
   return json({
     checkout_url: result.data?.checkout_url,

@@ -16,9 +16,25 @@
     <img src="assets/brand/logo-emblem.png" alt="F-LDx" class="h-16 w-auto mx-auto">
     <p class="mt-6 text-xs font-semibold uppercase tracking-[.18em] text-leaf">Payment Submitted</p>
     <h1 class="font-head font-extrabold text-3xl text-navy mt-3">Thank you</h1>
-    <p class="text-muted mt-4 leading-relaxed">Your PayChangu payment has been submitted. Future-Life Diagnostics will verify the transaction and follow up with your booking details.</p>
-    <a href="index.html#contact" class="mt-7 inline-flex items-center justify-center bg-leaf hover:bg-leaf-ink text-white font-semibold px-6 py-3 transition">Back to website</a>
+    <p class="text-muted mt-4 leading-relaxed">Your PayChangu payment has been submitted. Future-Life Diagnostics will verify the transaction and follow up to confirm your appointment.</p>
+    <p id="refLine" class="hidden mt-4 text-sm text-ink">Your booking reference: <span id="refValue" class="font-semibold text-navy"></span><br><span class="text-muted">Please keep this for your records.</span></p>
+    <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
+      <a id="waLink" href="https://wa.me/265980855554" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:opacity-90 text-white font-semibold px-6 py-3 transition">
+        <iconify-icon icon="mdi:whatsapp" class="text-xl"></iconify-icon> Confirm on WhatsApp
+      </a>
+      <a href="index.html#contact" class="inline-flex items-center justify-center border border-line text-navy font-semibold px-6 py-3 transition hover:bg-navy-soft/40">Back to website</a>
+    </div>
   </section>
 </main>
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script>
+  const ref = new URLSearchParams(location.search).get('ref') || '';
+  if (ref) {
+    document.getElementById('refValue').textContent = ref;
+    document.getElementById('refLine').classList.remove('hidden');
+  }
+  const msg = `Hello Future-Life Diagnostics, I have just paid for my booking${ref ? ' (Ref: ' + ref + ')' : ''}. I'd like to confirm my appointment.`;
+  document.getElementById('waLink').href = 'https://wa.me/265980855554?text=' + encodeURIComponent(msg);
+</script>
 </body>
 </html>

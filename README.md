@@ -134,6 +134,31 @@ Use a `sec-test-…` key, then on the PayChangu checkout page:
 
 Use `npm run build:deploy` before publishing static changes.
 
+### Bookings, records & notifications
+
+When a payment succeeds, PayChangu calls the **webhook**
+([`netlify/functions/paychangu-webhook.mjs`](netlify/functions/paychangu-webhook.mjs))
+at `/api/paychangu/webhook`. The webhook verifies the signature, re-checks the
+payment with PayChangu, then:
+
+1. **Records** the booking to **Google Sheets** (status `Pending Payment` → `Paid`).
+2. **Emails** the lab a new-booking alert and the customer a confirmation (via Resend).
+3. **WhatsApps** the lab an alert (via CallMeBot). The customer also gets a
+   one-tap "Confirm on WhatsApp" link on `pay-success.html`.
+
+Each integration is optional and activates only when its env vars are set
+(see [`.env.example`](.env.example)) — nothing breaks if a key is missing.
+
+| Variable | For |
+|---|---|
+| `PAYCHANGU_WEBHOOK_SECRET` | Verifying webhook authenticity |
+| `SHEETS_WEBHOOK_URL`, `SHEETS_TOKEN` | Logging bookings to Google Sheets (see [`apps-script/sheet-logger.gs`](apps-script/sheet-logger.gs)) |
+| `RESEND_API_KEY`, `MAIL_FROM`, `LAB_NOTIFY_EMAIL` | Email notifications |
+| `CALLMEBOT_PHONE`, `CALLMEBOT_APIKEY` | Lab WhatsApp alerts |
+
+**Set the webhook URL in PayChangu** Dashboard → Settings → API & Webhooks:
+`https://<your-site>/api/paychangu/webhook`
+
 ---
 
 ## Contact
