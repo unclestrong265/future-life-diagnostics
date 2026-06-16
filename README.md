@@ -47,12 +47,17 @@ Research, Medical Technologies) · Our Clients · Why Choose Us · Contact
 ## Project structure
 
 ```
-index.html            → the website
-src/input.css         → Tailwind source (edit styles here)
-tailwind.config.js    → theme / brand colours
-dist/output.css       → COMPILED stylesheet (generated — do not edit by hand)
-logo-emblem.png       → F-LDx logo
-hero-lab.png          → hero background image
+index.html              → the website
+pay-success.html        → PayChangu success landing page
+pay-failed.html         → PayChangu failure landing page
+src/input.css           → Tailwind source (edit styles here)
+tailwind.config.js      → theme / brand colours
+dist/output.css         → COMPILED stylesheet (generated — do not edit by hand)
+assets/brand/           → logos & hero image (logo-emblem, logo-lockup, hero-lab)
+assets/compliance/      → regulator & partner logos (marquee)
+scripts/sync-docs.mjs   → copies the built site into docs/ for GitHub Pages
+docs/                   → GitHub Pages publish folder (generated — do not edit)
+netlify/functions/      → PayChangu serverless payment function
 ```
 
 ## Editing & building
@@ -82,10 +87,10 @@ To host elsewhere (Netlify, Vercel, Cloudflare Pages), upload these files:
 
 ```
 index.html
+pay-success.html
+pay-failed.html
 dist/output.css
-logo-emblem.png
-logo-lockup.png
-hero-lab.png
+assets/
 ```
 
 ## PayChangu payments

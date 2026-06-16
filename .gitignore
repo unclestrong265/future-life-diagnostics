@@ -4,9 +4,5 @@ node_modules/
 .env.*
 
 # internal / private working material (do NOT publish to public GitHub Pages)
-references/
-details.md
+private/
 prompt.md
-concept-note.html
-Future-Life-Concept-Note.pdf
-ChatGPT Image*.png

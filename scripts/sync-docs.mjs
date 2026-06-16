@@ -13,9 +13,6 @@ const entries = [
   "pay-failed.html",
   "dist",
   "assets",
-  "hero-lab.png",
-  "logo-emblem.png",
-  "logo-lockup.png",
 ];
 
 for (const entry of entries) {
