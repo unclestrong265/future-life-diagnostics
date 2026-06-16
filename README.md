@@ -95,17 +95,44 @@ assets/
 
 ## PayChangu payments
 
-The online payment form uses a Netlify Function so the PayChangu secret key stays
-server-side. Deploy the repository on Netlify and add these environment variables:
+The online payment form posts to a **Netlify Function**
+([`netlify/functions/create-payment.mjs`](netlify/functions/create-payment.mjs)),
+which calls PayChangu's Standard Checkout API server-side so the secret key never
+reaches the browser.
 
-```
-PAYCHANGU_SECRET_KEY=your_client_secret_key
-PAYCHANGU_CURRENCY=MWK
-SITE_URL=https://your-live-site-url
-```
+> ⚠️ **GitHub Pages cannot run this function** (it is static only). The
+> payment-enabled site must be hosted on **Netlify** (already configured in
+> [`netlify.toml`](netlify.toml)). GitHub Pages can stay as a brochure mirror.
 
-Use `npm run build:deploy` before publishing static changes. The Netlify build is
-already configured in `netlify.toml`.
+### Deploy to Netlify
+
+1. Netlify → **Add new site → Import an existing project** → pick the
+   `future-life-diagnostics` GitHub repo. Build command and publish folder are
+   read automatically from `netlify.toml`.
+2. **Site settings → Environment variables**, add:
+
+   | Key | Value |
+   |---|---|
+   | `PAYCHANGU_SECRET_KEY` | your secret key (`sec-test-…` to test, `sec-live-…` for production) |
+   | `PAYCHANGU_CURRENCY` | `MWK` |
+   | `SITE_URL` | _(optional)_ your live URL, e.g. `https://futurelifediagnostics.com` |
+
+3. **Deploys → Trigger deploy**. The form button on the live site then opens the
+   PayChangu checkout.
+
+See [`.env.example`](.env.example) for the same variables when running locally.
+
+### Test mode (sandbox)
+
+Use a `sec-test-…` key, then on the PayChangu checkout page:
+
+- **Card:** `4242 4242 4242 4242`, CVC `123`, expiry `12/30`, 3DS OTP `1234` → success
+- **Airtel Money:** `990000000` → success · `990000001` → failed
+- **TNM Mpamba:** `899817565` → success · `899817566` → failed
+
+(Enter mobile numbers without the leading `0`. No real money moves in test mode.)
+
+Use `npm run build:deploy` before publishing static changes.
 
 ---
 
